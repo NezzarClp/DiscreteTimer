@@ -2,8 +2,15 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import { Vibration } from 'react-native';
+import { View, Vibration } from 'react-native';
 import { Text, Button } from 'native-base';
+
+function mapStateToProps(state) {
+    return {
+        isTimerStarted: state.timer.isTimerStarted,
+        duration: state.timer.duration,
+    };
+}
 
 export class Timer extends React.Component {
 
@@ -13,9 +20,14 @@ export class Timer extends React.Component {
 
     render() {
         return (
-            <Button block onPress={this.props.onStartPress}>
-                <Text>{'END'}</Text>
-            </Button>
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Button onPress={this.props.onStartPress}>
+                    <Text>{'END'}</Text>
+                </Button>
+                <Button onPress={this.props.onStartPress}>
+                    <Text>{'END'}</Text>
+                </Button>
+            </View>
         );
     }
 }

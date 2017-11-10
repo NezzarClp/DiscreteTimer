@@ -7,7 +7,7 @@ const main = (state = initialState, action) => {
         case 'STARTERR': {
             return {
                 ...state,
-                page: 'MAIN',
+                page: 'LIST',
             };
         }
         default:
@@ -15,4 +15,4 @@ const main = (state = initialState, action) => {
     }
 };
 
-export default main
+export default main;

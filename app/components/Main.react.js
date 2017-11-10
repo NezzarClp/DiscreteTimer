@@ -8,6 +8,7 @@ import { Text, Button } from 'native-base';
 import MainAction from '../actions/MainAction';
 
 import Timer from './Timer.react';
+import TimerOptionsList from './TimerOptionsList.react';
 
 function mapStateToProps(state) {
     return {
@@ -41,11 +42,13 @@ export class Main extends React.Component {
 
     render() {
         const { page } = this.props;
+        const style = (page === 'LIST' ? styles.timerOptionsList : styles.container);
 
         return (
-            <View style={styles.container}>
+            <View style={style}>
                 {(page === 'START') ? this._renderStartPage() : null}
                 {(page === 'MAIN') ? this._renderTimerPage() : null}
+                {(page === 'LIST') ? <TimerOptionsList /> : null}
             </View>
         );
     }
@@ -60,4 +63,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    timerOptionsList: {
+        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+    }
 });
