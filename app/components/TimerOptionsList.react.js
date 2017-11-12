@@ -4,18 +4,39 @@ import { connect } from 'react-redux';
 
 import { StyleSheet, View } from 'react-native';
 
-import TimerOptions from './TimerOptions.react';
+import TimerOptionContainer from './TimerOptionContainer.react';
+
+function mapStateToProps(state) {
+    return {
+        optionsList: state.timerOptions.optionsList,
+    };
+}
 
 export class TimerOptionsList extends React.Component {
+
+    _renderTimerOptions() {
+        const { optionsList } = this.props;
+        const numOptions = optionsList.length;
+        const timerOptions = [];
+
+        for (let i = 0; i < numOptions; i++) {
+            const { id } = optionsList[i];
+
+            timerOptions.push(
+                <TimerOptionContainer
+                    key={`timerOption-${id}`}
+                    id={id}
+                />
+            );
+        }
+
+        return timerOptions;
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <TimerOptions />
-                <TimerOptions />
-                <TimerOptions />
-                <TimerOptions />
-                <TimerOptions />
+                {this._renderTimerOptions()}
             </View>
         );
     }
@@ -23,10 +44,10 @@ export class TimerOptionsList extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        top: 100,
+        top: 20,
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
 });
 
-export default connect()(TimerOptionsList);
+export default connect(mapStateToProps)(TimerOptionsList);
